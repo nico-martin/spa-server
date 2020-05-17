@@ -1,0 +1,40 @@
+{
+  "name": "server-side-metas",
+  "version": "1.0.0",
+  "description": "Server Side Metas",
+  "main": "index.js",
+  "author": "mail@nicomartin.ch",
+  "license": "MIT",
+  "scripts": {
+    "tsc": "tsc",
+    "dev": "ts-node-dev --respawn --transpileOnly ./run.ts",
+    "prod": "ts-node ./run.ts -T",
+    "eslint": "eslint . --ext ts"
+  },
+  "dependencies": {
+    "@types/cheerio": "^0.22.18",
+    "@types/cors": "^2.8.6",
+    "@types/express": "^4.17.2",
+    "@types/node": "^13.9.3",
+    "@types/node-static": "^0.7.5",
+    "@types/puppeteer": "^2.1.0",
+    "@types/sha1": "^1.1.2",
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
+    "beautiful-dom": "^1.0.7",
+    "cheerio": "^1.0.0-rc.3",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "http": "^0.0.1-security",
+    "node-static": "^0.7.11",
+    "prettier": "^1.19.1",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.8.3"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5"
+  }
+}
