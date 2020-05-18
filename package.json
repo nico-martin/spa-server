@@ -8,14 +8,11 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node-dev --respawn --transpileOnly ./run.ts",
-    "prod": "ts-node ./run.ts -T",
     "eslint": "eslint . --ext ts"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "http": "^0.0.1-security",
-    "node-fetch": "^2.6.0",
     "node-static": "^0.7.11",
     "path-to-regexp": "^6.1.0"
   },
@@ -40,6 +37,6 @@
     "trailingComma": "es5"
   },
   "files": [
-    "lib"
+    "src"
   ]
 }

@@ -1,8 +1,6 @@
 # Node Metas
 
-> **"Node Metas"** is a working title. I'm looking for a better name once I figured out where this is going 😁
-
-> It's a very early preview. So a lot of things are not yet final.
+> **Note:** This is a very early preview. So a lot of things are not yet final.
 
 Node Metas is a NodeJS lib that starts a production ready NodeJS Webserver, serves a specific dir and allows you to manipulate the meta headers inside the index.html.
 
