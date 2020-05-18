@@ -1,7 +1,7 @@
 node_modules/
 .idea/
 .env
-dist
+lib
 combined.log
 error.log
 yarn-error.log
