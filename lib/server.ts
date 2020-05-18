@@ -1,9 +1,10 @@
 import http from 'http';
 import staticServer from 'node-static';
-const file = new staticServer.Server('./dist');
+import { untrailingSlashIt } from './helpers';
 
 export default (
-  port: number
+  port: number,
+  serveDir: string
 ): Promise<{
   request: http.IncomingMessage;
   response: http.ServerResponse;
@@ -12,8 +13,9 @@ export default (
     headers: Record<string, string>;
     message: string;
   };
-}> =>
-  new Promise(resolve => {
+}> => {
+  const file = new staticServer.Server(`./${untrailingSlashIt(serveDir)}`);
+  return new Promise(resolve => {
     http
       .createServer((request, response) => {
         request
@@ -33,3 +35,4 @@ export default (
       })
       .listen(port);
   });
+};

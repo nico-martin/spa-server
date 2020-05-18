@@ -1,12 +1,17 @@
 import server from './server';
-import { readFile } from './helpers';
+import { readFile, trailingSlashIt } from './helpers';
 import cheerio from 'cheerio';
 import { Config } from './types';
 
-const serverSideMetas = ({ elements = [], port = 8080 }: Config) =>
-  server(port).then(async ({ request, response, error }) => {
+const serverSideMetas = ({
+  elements = [],
+  port = 8080,
+  indexFile = 'index.html',
+  serveDir = 'dist/',
+}: Config) =>
+  server(port, serveDir).then(async ({ request, response, error }) => {
     try {
-      let index = await readFile('./dist/index.html');
+      let index = await readFile(`./${trailingSlashIt(serveDir)}${indexFile}`);
 
       // Parse Metas
       let metas = {};
