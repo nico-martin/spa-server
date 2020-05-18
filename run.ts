@@ -8,19 +8,19 @@ const wait = (ms: number) =>
 serverSideMetas({
   elements: [
     {
-      regex: /\/world\/([0-9]*)/,
-      metas: params => {
+      path: '/user/:id/',
+      metas: request => {
         return {
-          hello: params[1],
+          hello: 'id' in request.params ? request.params.id : '',
         };
       },
     },
     {
-      regex: /\/hello\/([a-z]*)/,
-      metas: async params => {
+      path: '/post/:slug/',
+      metas: async request => {
         await wait(1000);
         return {
-          hello: params[1],
+          hello: 'slug' in request.params ? request.params.slug : '',
         };
       },
     },

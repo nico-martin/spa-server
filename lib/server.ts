@@ -2,37 +2,22 @@ import http from 'http';
 import staticServer from 'node-static';
 import { untrailingSlashIt } from './helpers';
 
-export default (
-  port: number,
-  serveDir: string
-): Promise<{
-  request: http.IncomingMessage;
-  response: http.ServerResponse;
-  error: {
-    status: number;
-    headers: Record<string, string>;
-    message: string;
-  };
-}> => {
+export default (serveDir: string, handleError: Function): http.Server => {
   const file = new staticServer.Server(`./${untrailingSlashIt(serveDir)}`);
-  return new Promise(resolve => {
-    http
-      .createServer((request, response) => {
-        request
-          .addListener('end', () => {
-            file.serve(request, response, error => {
-              if (error) {
-                resolve({
-                  request,
-                  response,
-                  // @ts-ignore
-                  error,
-                });
-              }
+  return http.createServer((request, response) => {
+    request
+      .addListener('end', () => {
+        file.serve(request, response, async error => {
+          if (error) {
+            handleError({
+              request,
+              response,
+              // @ts-ignore
+              error,
             });
-          })
-          .resume();
+          }
+        });
       })
-      .listen(port);
+      .resume();
   });
 };
