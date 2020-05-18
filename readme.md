@@ -18,7 +18,8 @@ At the core this lib provides the possibility to define routes and to pass a fun
   path: '/',
   metas: request => {
     return {
-      url: '/'
+      'name-of-the-meta': 'content of the meta',
+      url: '/',
     }
   },
 }
