@@ -1,6 +1,6 @@
 import http from 'http';
 
-export interface Element {
+export interface Route {
   path: string;
   metas: (request: {
     path: string;
@@ -9,7 +9,7 @@ export interface Element {
 }
 
 export interface Config {
-  elements?: Array<Element>;
+  routes?: Array<Route>;
   port?: number;
   indexFile?: string;
   serveDir?: string;
@@ -24,3 +24,5 @@ export interface Handle {
     message: string;
   };
 }
+
+export type Metas = Record<string, string>;

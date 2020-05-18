@@ -1,27 +1,31 @@
 import serverSideMetas from './lib/index';
-
-const wait = (ms: number) =>
-  new Promise(resolve => {
-    setTimeout(() => resolve(), ms);
-  });
+import fetch from 'node-fetch';
 
 serverSideMetas({
-  elements: [
+  routes: [
     {
       path: '/user/:id/',
-      metas: request => {
-        return {
-          hello: 'id' in request.params ? request.params.id : '',
-        };
-      },
+      metas: request => ({
+        'using-id': 'id' in request.params ? request.params.id : '',
+        hello: 'world',
+      }),
     },
     {
-      path: '/post/:slug/',
+      path: '/post/:id/',
       metas: async request => {
-        await wait(1000);
-        return {
-          hello: 'slug' in request.params ? request.params.slug : '',
-        };
+        const id = 'id' in request.params ? request.params.id : 0;
+        let metas = {};
+        try {
+          const resp = await (
+            await fetch(`https://sayhello.ch/wp-json/wp/v2/posts/${id}/`)
+          ).json();
+          metas = {
+            title: resp.title.rendered,
+          };
+        } catch (error) {
+          console.log('Error for /post/:id/');
+        }
+        return metas;
       },
     },
   ],
