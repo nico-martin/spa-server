@@ -1,7 +1,7 @@
 {
-  "name": "server-side-metas",
+  "name": "node-metas",
   "version": "0.0.1",
-  "description": "Server Side Metas",
+  "description": "Node Metas",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "author": "mail@nicomartin.ch",

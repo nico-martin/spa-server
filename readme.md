@@ -1,10 +1,10 @@
-# Server Side Metas
+# Node Metas
 
-> **"Server Side Metas"** is a working title. I'm looking for a better name once I figured out where this is going 😁
+> **"Node Metas"** is a working title. I'm looking for a better name once I figured out where this is going 😁
 
 > It's a very early preview. So a lot of things are not yet final.
 
-Server Side Metas is a NodeJS lib that starts a production ready NodeJS Webserver, serves a specific dir and allows you to manipulate the meta headers inside the index.html.
+Node Metas is a NodeJS lib that starts a production ready NodeJS Webserver, serves a specific dir and allows you to manipulate the meta headers inside the index.html.
 
 This is super useful if you only need to add server-side rendered meta tags but you don't want to render the whole app serverside.
 
@@ -28,10 +28,10 @@ At the core this lib provides the possibility to define routes and to pass a fun
 ### Full example
 
 ```js
-import serverSideMetas from './lib/index';
+import nodeMetas from './lib/index';
 import fetch from 'node-fetch';
 
-serverSideMetas({
+nodeMetas({
   routes: [
     {
       path: '/user/:id/',

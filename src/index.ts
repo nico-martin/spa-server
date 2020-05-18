@@ -5,7 +5,7 @@ import { readFile, trailingSlashIt } from './helpers';
 import parseMetas from './parse';
 import applyMetas from './apply';
 
-const serverSideMetas = ({
+const nodeMetas = ({
   routes = [],
   port = 8080,
   indexFile = 'index.html',
@@ -37,4 +37,4 @@ const serverSideMetas = ({
   });
 };
 
-export default serverSideMetas;
+export default nodeMetas;
