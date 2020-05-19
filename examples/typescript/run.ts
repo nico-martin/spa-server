@@ -1,4 +1,4 @@
-import nodeMetas from '../../lib';
+import nodeMetas from '../../lib'; // should be 'node-metas' if imported from npm
 import fetch from 'node-fetch';
 
 nodeMetas({

@@ -1,7 +1,7 @@
 node_modules/
+**/node_modules/
 .idea/
 .env
 lib
-combined.log
-error.log
 yarn-error.log
+**/yarn-error.log

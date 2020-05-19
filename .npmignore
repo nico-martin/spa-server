@@ -5,3 +5,4 @@ tslint.json
 .eslintrc
 .editorconfig
 .idea/
+examples/

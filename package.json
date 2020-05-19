@@ -1,6 +1,6 @@
 {
   "name": "node-metas",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Node Metas",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -37,6 +37,6 @@
     "trailingComma": "es5"
   },
   "files": [
-    "src"
+    "lib"
   ]
 }
