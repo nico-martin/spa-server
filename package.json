@@ -1,18 +1,19 @@
 {
   "name": "node-metas",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Node Metas",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "author": "mail@nicomartin.ch",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/nico-martin/node-metas/"
+    "type": "git",
+    "url": "https://github.com/nico-martin/node-metas/"
   },
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "eslint": "eslint . --ext ts"
+    "eslint": "eslint . --ext ts",
+    "serve": "node-metas"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
@@ -39,6 +40,9 @@
   "prettier": {
     "singleQuote": true,
     "trailingComma": "es5"
+  },
+  "bin": {
+    "node-metas": "./lib/bin/cli.js"
   },
   "files": [
     "lib"
