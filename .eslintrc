@@ -6,7 +6,8 @@
   ],
   "rules": {
     "no-console": "warn",
-    "@typescript-eslint/ban-ts-ignore": "off"
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "@typescript-eslint/no-namespace": "off"
   },
   "parserOptions": {
     "ecmaVersion": 2018,

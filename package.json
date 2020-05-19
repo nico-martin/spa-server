@@ -5,6 +5,10 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "author": "mail@nicomartin.ch",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/nico-martin/node-metas/"
+  },
   "license": "MIT",
   "scripts": {
     "build": "tsc",
