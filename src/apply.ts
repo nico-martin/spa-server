@@ -1,8 +1,8 @@
-import { Metas } from './types';
+import { NodeMetas } from './index';
 import cheerio from 'cheerio';
 import { escapeHtml } from './helpers';
 
-const applyMetas = (template: string, metas: Metas): string => {
+const applyMetas = (template: string, metas: NodeMetas.Metas): string => {
   if (!Object.keys(metas).length) {
     return template;
   }

@@ -1,8 +1,8 @@
 # Node Metas
 
-> **Note:** This is a very early preview. So a lot of things are not yet final.
+> **Note:** This is a very early preview. So right now I expect to introduce breaking changes with each release.
 
-Node Metas is a NodeJS lib that starts a production ready NodeJS Webserver, serves a specific dir and allows you to manipulate the meta headers inside the index.html.
+"Node Metas" is a NodeJS library that starts a production ready NodeJS Webserver, serves a specific dir and allows you to manipulate the meta headers inside the index.html.
 
 This is super useful if you only need to add server-side rendered meta tags but you don't want to render the whole app serverside.
 
@@ -34,23 +34,26 @@ nodeMetas({
     {
       path: '/user/:id/',
       metas: request => ({
-        'using-id': 'id' in request.params ? request.params.id : '',
+        'user-id': 'id' in request.params ? request.params.id : '',
         hello: 'world',
       }),
     },
     {
       path: '/post/:id/',
       metas: async request => { // can be async
-        // ! You should add error handling. Works for example for http://localhost:8080/post/1500/
-        const resp = await (
-          await fetch(
-            `https://sayhello.ch/wp-json/wp/v2/posts/${request.params.id}/`
-          )
-        ).json();
-
-        return {
-          title: resp.title.rendered,
-        };
+        const id = 'id' in request.params ? request.params.id : 0;
+        let metas = {};
+        try {
+          const resp = await (
+            await fetch(`https://sayhello.ch/wp-json/wp/v2/posts/${id}/`)
+          ).json();
+          metas = {
+            title: resp.title.rendered,
+          };
+        } catch (error) {
+          console.log('Error for /post/:id/');
+        }
+        return metas;
       },
     },
   ],

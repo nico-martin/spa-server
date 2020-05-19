@@ -1,10 +1,10 @@
 import { match } from 'path-to-regexp';
-import { Route, Metas } from './types';
+import { NodeMetas } from './index';
 
 const parseMetas = async (
-  routes: Array<Route>,
+  routes: Array<NodeMetas.Route>,
   url: string
-): Promise<Metas> => {
+): Promise<NodeMetas.Metas> => {
   let metas = {};
   for (let i = 0; i < Object.keys(routes).length; i++) {
     const route = Object.values(routes)[i];
@@ -12,10 +12,12 @@ const parseMetas = async (
     const result = urlMatch(url);
 
     if (result) {
-      const newMetas = await route.metas({
+      const params: NodeMetas.RouteMetasParams = {
         path: result.path,
         params: result.params,
-      });
+      };
+
+      const newMetas = await route.metas(params);
       metas = { ...metas, ...newMetas };
     }
   }

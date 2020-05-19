@@ -1,6 +1,7 @@
-src
+src/
 tsconfig.json
 tslint.json
 .prettierrc
 .eslintrc
 .editorconfig
+.idea/
