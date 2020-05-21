@@ -1,5 +1,5 @@
 import server from './server';
-import { readFile, trailingSlashIt } from './helpers';
+import { readFile, trailingSlashIt, log } from './helpers';
 import parseMetas from './parse';
 import applyMetas from './apply';
 import http from 'http';
@@ -59,13 +59,13 @@ const nodeMetas = ({
       response.end(index);
     } catch (err) {
       response.writeHead(500);
-      console.log(`ERROR: ${err}`);
+      log(`ERROR: ${err}`);
       response.end('internal server error');
     }
   };
 
   server(serveDir, handle).listen(port, () => {
-    console.log('Running on Port: ' + port);
+    log('Running on Port: ' + port);
   });
 };
 

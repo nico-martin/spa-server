@@ -13,3 +13,5 @@ export const escapeHtml = (unsafe: string): string =>
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
+
+export const log = (text: string) => console.log(`node-metas: ${text}`);
