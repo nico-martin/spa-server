@@ -13,6 +13,7 @@
     "@types/node": "^13.9.3",
     "@types/node-fetch": "^2.5.7",
     "node-fetch": "^2.6.0",
+    "node-metas": "^0.0.6",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.8.3"
   }
