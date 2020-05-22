@@ -11,6 +11,15 @@ nodeMetas({
       }),
     },
     {
+      path: '/user/5/',
+    },
+    {
+      path: '/user/5/add/',
+    },
+    {
+      path: '/user/5/:action/',
+    },
+    {
       path: '/post/:id/',
       metas: async request => {
         const id = 'id' in request.params ? request.params.id : 0;
@@ -27,6 +36,12 @@ nodeMetas({
         }
         return metas;
       },
+    },
+  ],
+  redirects: [
+    {
+      path: '/nutzer/:id/',
+      to: '/user/:id/',
     },
   ],
 });
