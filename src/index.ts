@@ -36,6 +36,7 @@ export namespace NodeMetas {
     port?: number;
     indexFile?: string;
     serveDir?: string;
+    onError?: Function;
     defaultStatusCode?: number;
   }
 
@@ -56,6 +57,7 @@ const nodeMetas = ({
   port = 8080,
   indexFile = 'index.html',
   serveDir = 'dist/',
+  onError = () => {},
   defaultStatusCode = 200,
 }: NodeMetas.Config) => {
   const handle = async ({
@@ -99,6 +101,7 @@ const nodeMetas = ({
       /**
        * If anything throws, send 500
        */
+      onError(err);
       response.writeHead(500);
       log(`ERROR: ${err}`);
       response.end('internal server error');
