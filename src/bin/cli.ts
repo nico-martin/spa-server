@@ -8,12 +8,16 @@ const folder = process.cwd();
 const config = folder + '/server.config.js';
 
 try {
+  let c = {};
   if (!fs.existsSync(config)) {
-    throw 'server.config.js does not exist in project root';
+    log(
+      'server.config.js does not exist in project root. Default config will be used instead.'
+    );
+  } else {
+    c = require(config);
   }
 
   log('starting server..');
-  const c = require(config);
   nodeMetas(c);
 } catch (e) {
   log(e);

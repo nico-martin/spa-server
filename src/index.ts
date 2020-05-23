@@ -1,8 +1,9 @@
+import http from 'http';
 import server from './server';
 import { readFile, trailingSlashIt, log } from './helpers';
-import parseMetas from './parse';
-import applyMetas from './apply';
-import http from 'http';
+import { applyMetas } from './apply';
+import { parseRedirects } from './redirects';
+import { parseRoutes } from './routes';
 
 export namespace NodeMetas {
   export interface RouteMetasParams {
@@ -12,16 +13,30 @@ export namespace NodeMetas {
 
   export interface Route {
     path: string;
-    metas: (
+    response?: (
       request: RouteMetasParams
-    ) => Promise<Record<string, string>> | Record<string, string>;
+    ) => Promise<Partial<RouteResponse>> | Partial<RouteResponse>;
+  }
+
+  export interface RouteResponse {
+    metas: Metas;
+    statusCode: number;
+  }
+
+  export type Metas = Record<string, string>;
+
+  export interface Redirect {
+    path: string;
+    to: string;
   }
 
   export interface Config {
     routes?: Array<Route>;
+    redirects?: Array<Redirect>;
     port?: number;
     indexFile?: string;
     serveDir?: string;
+    defaultStatusCode?: number;
   }
 
   export interface Handle {
@@ -33,15 +48,15 @@ export namespace NodeMetas {
       message: string;
     };
   }
-
-  export type Metas = Record<string, string>;
 }
 
 const nodeMetas = ({
   routes = [],
+  redirects = [],
   port = 8080,
   indexFile = 'index.html',
   serveDir = 'dist/',
+  defaultStatusCode = 200,
 }: NodeMetas.Config) => {
   const handle = async ({
     request,
@@ -49,15 +64,41 @@ const nodeMetas = ({
     error,
   }: NodeMetas.Handle): Promise<void> => {
     try {
+      /**
+       * Redirect early
+       */
+      const redirect = parseRedirects(redirects, String(request.url));
+      if (redirect) {
+        log(`redirect ${request.url} to ${redirect}`);
+        response.writeHead(302, {
+          Location: redirect,
+        });
+        response.end();
+      }
+
+      /**
+       * read and manipulate index file
+       */
       const template = await readFile(
         `./${trailingSlashIt(serveDir)}${indexFile}`
       );
-      const metas = await parseMetas(routes, String(request.url));
-      const index = applyMetas(template, metas);
 
-      response.writeHead(200, error.headers);
+      const parsed = await parseRoutes(
+        routes,
+        String(request.url),
+        defaultStatusCode
+      );
+      const index = applyMetas(template, parsed.metas);
+
+      /**
+       * send response
+       */
+      response.writeHead(parsed.statusCode, error.headers);
       response.end(index);
     } catch (err) {
+      /**
+       * If anything throws, send 500
+       */
       response.writeHead(500);
       log(`ERROR: ${err}`);
       response.end('internal server error');

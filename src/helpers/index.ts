@@ -6,6 +6,12 @@ export const untrailingSlashIt = (str: string): string =>
 export const trailingSlashIt = (str: string): string =>
   untrailingSlashIt(str) + '/';
 
+export const unprecedingSlashIt = (str: string): string =>
+  str.replace(/^\//, '');
+
+export const precedingSlashIt = (str: string): string =>
+  '/' + unprecedingSlashIt(str);
+
 export const escapeHtml = (unsafe: string): string =>
   unsafe
     .replace(/&/g, '&amp;')
