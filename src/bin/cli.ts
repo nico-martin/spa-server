@@ -5,7 +5,11 @@ import nodeMetas from '../index';
 import { log } from '../helpers';
 
 const folder = process.cwd();
-const config = folder + '/server.config.js';
+let configFile = 'server.config.js';
+if (process.argv.length >= 3) {
+  configFile = process.argv[2];
+}
+const config = folder + '/' + configFile;
 
 try {
   let c = {};
