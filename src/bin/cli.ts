@@ -18,7 +18,7 @@ try {
       'server.config.js does not exist in project root. Default config will be used instead.'
     );
   } else {
-    c = require(config);
+    c = require(config).default;
   }
 
   log('starting server..');
