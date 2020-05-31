@@ -1,6 +1,6 @@
 {
   "name": "node-metas",
-  "version": "0.1.4",
+  "version": "0.1.7",
   "description": "Node Metas",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -43,7 +43,7 @@
     "trailingComma": "es5"
   },
   "bin": {
-    "node-metas": "esm ./lib/bin/cli.js"
+    "node-metas": "./lib/bin/cli.js"
   },
   "files": [
     "lib"

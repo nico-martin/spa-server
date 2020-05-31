@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node -r esm
 
 import fs from 'fs';
 import nodeMetas from '../index';

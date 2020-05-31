@@ -60,7 +60,6 @@ const nodeMetas = ({
   onError = () => {},
   defaultStatusCode = 200,
 }: NodeMetas.Config) => {
-  console.log('THE PORT', port);
   const handle = async ({
     request,
     response,
