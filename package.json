@@ -1,6 +1,6 @@
 {
   "name": "node-metas",
-  "version": "0.1.7",
+  "version": "0.1.16",
   "description": "Node Metas",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -12,6 +12,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
+    "dev": "tsc -w",
     "eslint": "eslint . --ext ts",
     "cli": "node -r esm ./lib/bin/cli.js"
   },

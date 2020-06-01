@@ -1,6 +1,12 @@
 import http from 'http';
 import server from './server';
-import { readFile, trailingSlashIt, log } from './helpers';
+import {
+  readFile,
+  trailingSlashIt,
+  log,
+  logLevels,
+  normalizePath,
+} from './helpers';
 import { applyMetas } from './apply';
 import { parseRedirects } from './redirects';
 import { parseRoutes } from './routes';
@@ -38,6 +44,7 @@ export namespace NodeMetas {
     serveDir?: string;
     onError?: Function;
     defaultStatusCode?: number;
+    logLevel?: LogLevel;
   }
 
   export interface Handle {
@@ -49,6 +56,16 @@ export namespace NodeMetas {
       message: string;
     };
   }
+
+  export type LogLevel = 'DEBUG' | 'WARNING' | 'ERROR' | 'SYSTEM';
+}
+
+declare global {
+  namespace NodeJS {
+    interface Global {
+      logLevel: NodeMetas.LogLevel;
+    }
+  }
 }
 
 const nodeMetas = ({
@@ -59,19 +76,23 @@ const nodeMetas = ({
   serveDir = 'dist/',
   onError = () => {},
   defaultStatusCode = 200,
+  logLevel = 'ERROR',
 }: NodeMetas.Config) => {
+  global.logLevel = logLevel;
+
   const handle = async ({
     request,
     response,
     error,
   }: NodeMetas.Handle): Promise<void> => {
     try {
+      const url = normalizePath(String(request.url));
       /**
        * Redirect early
        */
-      const redirect = parseRedirects(redirects, String(request.url));
+      const redirect = parseRedirects(redirects, url);
       if (redirect) {
-        log(`redirect ${request.url} to ${redirect}`);
+        log(`redirect ${request.url} to ${redirect}`, logLevels.DEBUG);
         response.writeHead(302, {
           Location: redirect,
         });
@@ -85,12 +106,18 @@ const nodeMetas = ({
         `./${trailingSlashIt(serveDir)}${indexFile}`
       );
 
-      const parsed = await parseRoutes(
-        routes,
-        String(request.url),
-        defaultStatusCode
-      );
+      log('------------------', logLevels.DEBUG);
+      log(`starting ${url}`, logLevels.DEBUG);
+      const parsed = await parseRoutes(routes, url, defaultStatusCode);
       const index = applyMetas(template, parsed.metas);
+      log(`statuscode ${parsed.statusCode}`, logLevels.DEBUG);
+      log(
+        `metas { ${Object.entries(parsed.metas)
+          .map(([key, value]) => `${key}: ${value}`)
+          .join(', ')} }`,
+        logLevels.DEBUG
+      );
+      log('------------------', logLevels.DEBUG);
 
       /**
        * send response
@@ -103,13 +130,13 @@ const nodeMetas = ({
        */
       onError(err);
       response.writeHead(500);
-      log(`ERROR: ${err}`);
+      log(err, logLevels.ERROR);
       response.end('internal server error');
     }
   };
 
   server(serveDir, handle).listen(port, () => {
-    log('Running on Port: ' + port);
+    log('Running on Port: ' + port, logLevels.SYSTEM);
   });
 };
 

@@ -5,12 +5,13 @@ nodeMetas({
   routes: [
     {
       path: '/user/:id/',
-      response: request => ({
-        metas: {
-          title: `User ${'id' in request.params ? request.params.id : ''}`,
-        },
-        statusCode: 203,
-      }),
+      response: request => {
+        return {
+          metas: {
+            title: `User ${'id' in request.params ? request.params.id : ''}`,
+          },
+        };
+      },
     },
     {
       path: '/post/:id/',
@@ -40,4 +41,5 @@ nodeMetas({
       to: '/user/:id/',
     },
   ],
+  logLevel: 'DEBUG',
 });

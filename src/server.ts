@@ -1,6 +1,6 @@
 import http from 'http';
 import staticServer from 'node-static';
-import { untrailingSlashIt } from './helpers';
+import { log, logLevels, untrailingSlashIt } from './helpers';
 
 export default (serveDir: string, handleError: Function): http.Server => {
   const file = new staticServer.Server(`./${untrailingSlashIt(serveDir)}`);
@@ -15,6 +15,8 @@ export default (serveDir: string, handleError: Function): http.Server => {
               // @ts-ignore
               error,
             });
+          } else {
+            log(`Static file served: ${request.url}`, logLevels.DEBUG);
           }
         });
       })
