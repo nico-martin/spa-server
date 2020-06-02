@@ -47,10 +47,12 @@ export const parseRoutes = async (
       })
     : {
         metas: {},
+        headers: {},
         statusCode: defaultStatusCode,
       };
   return {
     metas: processed.metas || {},
+    headers: processed.headers || {},
     statusCode: processed.statusCode || defaultStatusCode,
   };
 };

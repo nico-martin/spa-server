@@ -43,3 +43,8 @@ export const log = (
 };
 
 export const normalizePath = (text: string) => trailingSlashIt(text);
+
+export const stringifyObject = (object: Record<string, string>) =>
+  Object.entries(object)
+    .map(([key, value]) => `${key}: ${value}`)
+    .join(', ');

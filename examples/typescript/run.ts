@@ -5,13 +5,14 @@ nodeMetas({
   routes: [
     {
       path: '/user/:id/',
-      response: request => {
-        return {
-          metas: {
-            title: `User ${'id' in request.params ? request.params.id : ''}`,
-          },
-        };
-      },
+      response: request => ({
+        metas: {
+          title: `User ${'id' in request.params ? request.params.id : ''}`,
+        },
+        headers: {
+          'my-custom-header': 'id' in request.params ? request.params.id : '',
+        },
+      }),
     },
     {
       path: '/post/:id/',

@@ -6,6 +6,7 @@ import {
   log,
   logLevels,
   normalizePath,
+  stringifyObject,
 } from './helpers';
 import { applyMetas } from './apply';
 import { parseRedirects } from './redirects';
@@ -26,10 +27,12 @@ export namespace NodeMetas {
 
   export interface RouteResponse {
     metas: Metas;
+    headers: Headers;
     statusCode: number;
   }
 
   export type Metas = Record<string, string>;
+  export type Headers = Record<string, string>;
 
   export interface Redirect {
     path: string;
@@ -111,18 +114,17 @@ const nodeMetas = ({
       const parsed = await parseRoutes(routes, url, defaultStatusCode);
       const index = applyMetas(template, parsed.metas);
       log(`statuscode ${parsed.statusCode}`, logLevels.DEBUG);
-      log(
-        `metas { ${Object.entries(parsed.metas)
-          .map(([key, value]) => `${key}: ${value}`)
-          .join(', ')} }`,
-        logLevels.DEBUG
-      );
+      log(`metas { ${stringifyObject(parsed.metas)} }`, logLevels.DEBUG);
+      log(`headers { ${stringifyObject(parsed.headers)} }`, logLevels.DEBUG);
       log('------------------', logLevels.DEBUG);
 
       /**
        * send response
        */
-      response.writeHead(parsed.statusCode, error.headers);
+      response.writeHead(parsed.statusCode, {
+        ...parsed.headers,
+        ...error.headers,
+      });
       response.end(index);
     } catch (err) {
       /**
