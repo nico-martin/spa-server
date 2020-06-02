@@ -1,3 +1,4 @@
+import fs from 'fs';
 import http from 'http';
 import server from './server';
 import {
@@ -45,6 +46,7 @@ export namespace NodeMetas {
     port?: number;
     indexFile?: string;
     serveDir?: string;
+    errorPagesDir?: string;
     onError?: Function;
     defaultStatusCode?: number;
     logLevel?: LogLevel;
@@ -77,6 +79,7 @@ const nodeMetas = ({
   port = 8080,
   indexFile = 'index.html',
   serveDir = 'dist/',
+  errorPagesDir = 'error-pages/',
   onError = () => {},
   defaultStatusCode = 200,
   logLevel = 'ERROR',
@@ -133,7 +136,11 @@ const nodeMetas = ({
       onError(err);
       response.writeHead(500);
       log(err, logLevels.ERROR);
-      response.end('internal server error');
+      let template = await readFile(__dirname + '../../error-pages/500.html');
+      if (fs.existsSync(trailingSlashIt(errorPagesDir) + '500.html')) {
+        template = await readFile(trailingSlashIt(errorPagesDir) + '500.html');
+      }
+      response.end(template);
     }
   };
 
