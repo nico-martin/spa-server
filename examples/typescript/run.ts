@@ -43,4 +43,4 @@ nodeMetas({
     },
   ],
   logLevel: 'DEBUG',
-});
+}).catch(e => console.log(e.toString()));

@@ -50,6 +50,7 @@ export namespace NodeMetas {
     onError?: Function;
     defaultStatusCode?: number;
     logLevel?: LogLevel;
+    serverOptions?: ServerOptions;
   }
 
   export interface Handle {
@@ -63,6 +64,13 @@ export namespace NodeMetas {
   }
 
   export type LogLevel = 'DEBUG' | 'WARNING' | 'ERROR' | 'SYSTEM';
+
+  export interface ServerOptions {
+    key?: string;
+    cert?: string;
+    pfx?: string;
+    passphrase?: string;
+  }
 }
 
 declare global {
@@ -73,7 +81,7 @@ declare global {
   }
 }
 
-const nodeMetas = ({
+const nodeMetas = async ({
   routes = [],
   redirects = [],
   port = 8080,
@@ -83,6 +91,7 @@ const nodeMetas = ({
   onError = () => {},
   defaultStatusCode = 200,
   logLevel = 'ERROR',
+  serverOptions = {},
 }: NodeMetas.Config) => {
   global.logLevel = logLevel;
 
@@ -144,8 +153,24 @@ const nodeMetas = ({
     }
   };
 
-  server(serveDir, handle).listen(port, () => {
-    log('Running on Port: ' + port, logLevels.SYSTEM);
+  const options = {
+    ...serverOptions,
+    ...('key' in serverOptions
+      ? { key: fs.readFileSync(String(serverOptions.key)) }
+      : {}),
+    ...('cert' in serverOptions
+      ? { cert: fs.readFileSync(String(serverOptions.cert)) }
+      : {}),
+  };
+
+  const isSSL = 'key' in options && 'cert' in options;
+
+  server(serveDir, handle, options).listen(port, () => {
+    log(`Running on Port ${port}`, logLevels.SYSTEM);
+    log(
+      `${isSSL ? 'https://' : 'http://'}localhost:${port}/`,
+      logLevels.SYSTEM
+    );
   });
 };
 
