@@ -1,4 +1,4 @@
-# Node Metas
+# SPA Server
 
 > **Note:** This is a very early preview. So right now I expect to introduce breaking changes with each release.
 
@@ -26,10 +26,10 @@ At the core this lib provides the possibility to define routes and to pass a fun
 ### Full example
 
 ```js
-import nodeMetas from './lib/index';
+import spaServer from './lib/index';
 import fetch from 'node-fetch';
 
-nodeMetas({
+spaServer({
   routes: [
     {
       path: '/user/:id/',

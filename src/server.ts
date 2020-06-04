@@ -2,12 +2,12 @@ import http from 'http';
 import https from 'https';
 import staticServer from 'node-static';
 import { log, logLevels, untrailingSlashIt } from './helpers';
-import { NodeMetas } from './index';
+import { SPAServer } from './index';
 
 export default (
   serveDir: string,
   handleError: Function,
-  options: NodeMetas.ServerOptions | {}
+  options: SPAServer.ServerOptions | {}
 ): http.Server => {
   const file = new staticServer.Server(`./${untrailingSlashIt(serveDir)}`);
   const handleResponse = (

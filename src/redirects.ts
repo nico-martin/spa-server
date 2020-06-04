@@ -1,11 +1,11 @@
-import { NodeMetas } from './index';
+import { SPAServer } from './index';
 import { filterRoute } from './routes';
 
 export const parseRedirects = (
-  redirects: Array<NodeMetas.Redirect>,
+  redirects: Array<SPAServer.Redirect>,
   url: string
 ): string => {
-  const filtered = filterRoute<NodeMetas.Redirect>(redirects, url);
+  const filtered = filterRoute<SPAServer.Redirect>(redirects, url);
 
   if (filtered) {
     let redirect = filtered.element.to;

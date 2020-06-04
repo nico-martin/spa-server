@@ -13,7 +13,7 @@ import { applyMetas } from './apply';
 import { parseRedirects } from './redirects';
 import { parseRoutes } from './routes';
 
-export namespace NodeMetas {
+export namespace SPAServer {
   export interface RouteMetasParams {
     path: string;
     params: Record<string, string> | {};
@@ -76,12 +76,12 @@ export namespace NodeMetas {
 declare global {
   namespace NodeJS {
     interface Global {
-      logLevel: NodeMetas.LogLevel;
+      logLevel: SPAServer.LogLevel;
     }
   }
 }
 
-const nodeMetas = async ({
+const spaServer = async ({
   routes = [],
   redirects = [],
   port = 8080,
@@ -92,14 +92,14 @@ const nodeMetas = async ({
   defaultStatusCode = 200,
   logLevel = 'ERROR',
   serverOptions = {},
-}: NodeMetas.Config) => {
+}: SPAServer.Config) => {
   global.logLevel = logLevel;
 
   const handle = async ({
     request,
     response,
     error,
-  }: NodeMetas.Handle): Promise<void> => {
+  }: SPAServer.Handle): Promise<void> => {
     try {
       const url = normalizePath(String(request.url));
       /**
@@ -174,4 +174,4 @@ const nodeMetas = async ({
   });
 };
 
-export default nodeMetas;
+export default spaServer;

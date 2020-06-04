@@ -1,4 +1,4 @@
-import { NodeMetas } from '../index';
+import { SPAServer } from '../index';
 
 export { default as readFile } from './readFile';
 
@@ -22,7 +22,7 @@ export const escapeHtml = (unsafe: string): string =>
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
 
-export const logLevels: Record<NodeMetas.LogLevel, NodeMetas.LogLevel> = {
+export const logLevels: Record<SPAServer.LogLevel, SPAServer.LogLevel> = {
   SYSTEM: 'SYSTEM',
   ERROR: 'ERROR',
   WARNING: 'WARNING',
@@ -31,7 +31,7 @@ export const logLevels: Record<NodeMetas.LogLevel, NodeMetas.LogLevel> = {
 
 export const log = (
   text: string,
-  level: NodeMetas.LogLevel = logLevels.ERROR
+  level: SPAServer.LogLevel = logLevels.ERROR
 ) => {
   const levelKey = Object.values(logLevels).indexOf(global.logLevel);
   const validKeys = Object.values(logLevels).splice(0, levelKey + 1);

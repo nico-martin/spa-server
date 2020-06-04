@@ -1,7 +1,7 @@
 #!/usr/bin/env node -r esm
 
 import fs from 'fs';
-import nodeMetas from '../index';
+import spaServer from '../index';
 import { log } from '../helpers';
 
 const folder = process.cwd();
@@ -22,7 +22,7 @@ try {
   }
 
   log('starting server..');
-  nodeMetas(c);
+  spaServer(c);
 } catch (e) {
   log(e);
 }

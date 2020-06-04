@@ -1,7 +1,7 @@
 {
-  "name": "node-metas",
+  "name": "spa-server",
   "version": "0.1.16",
-  "description": "Node Metas",
+  "description": "SPA Server",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "author": "mail@nicomartin.ch",

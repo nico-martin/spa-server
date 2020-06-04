@@ -1,4 +1,4 @@
-import { NodeMetas } from './index';
+import { SPAServer } from './index';
 import { match } from 'path-to-regexp';
 
 export const filterRoute = <T extends { path: string }>(
@@ -35,11 +35,11 @@ export const filterRoute = <T extends { path: string }>(
 };
 
 export const parseRoutes = async (
-  routes: Array<NodeMetas.Route>,
+  routes: Array<SPAServer.Route>,
   url: string,
   defaultStatusCode: number
-): Promise<NodeMetas.RouteResponse> => {
-  const route = filterRoute<NodeMetas.Route>(routes, url);
+): Promise<SPAServer.RouteResponse> => {
+  const route = filterRoute<SPAServer.Route>(routes, url);
   const processed = route?.element?.response
     ? await route.element.response({
         path: route.route,

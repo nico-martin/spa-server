@@ -1,7 +1,7 @@
-import nodeMetas from '../../lib'; // should be 'node-metas' if imported from npm
+import spaServer from '../../lib'; // should be 'node-metas' if imported from npm
 import fetch from 'node-fetch';
 
-nodeMetas({
+spaServer({
   routes: [
     {
       path: '/user/:id/',

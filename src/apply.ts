@@ -1,10 +1,10 @@
-import { NodeMetas } from './index';
+import { SPAServer } from './index';
 import cheerio from 'cheerio';
 import { escapeHtml } from './helpers';
 
 export const applyMetas = (
   template: string,
-  metas: NodeMetas.Metas
+  metas: SPAServer.Metas
 ): string => {
   if (!Object.keys(metas).length) {
     return template;
