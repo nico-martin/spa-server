@@ -1,13 +1,13 @@
 {
-  "name": "spa-server",
-  "version": "0.1.16",
+  "name": "@nico-martin/spa-server",
+  "version": "0.1.17",
   "description": "SPA Server",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "author": "mail@nicomartin.ch",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nico-martin/node-metas/"
+    "url": "git+https://github.com/nico-martin/node-metas.git"
   },
   "license": "MIT",
   "scripts": {
@@ -44,9 +44,17 @@
     "trailingComma": "es5"
   },
   "bin": {
-    "node-metas": "./lib/bin/cli.js"
+    "spa-server": "lib/bin/cli.js"
   },
   "files": [
     "lib"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/nico-martin/node-metas/issues"
+  },
+  "homepage": "https://github.com/nico-martin/node-metas#readme",
+  "directories": {
+    "example": "examples",
+    "lib": "lib"
+  }
 }
