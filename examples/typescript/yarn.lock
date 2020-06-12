@@ -2,6 +2,17 @@
 # yarn lockfile v1
 
 
+"@nico-martin/spa-server@^0.1.17":
+  version "0.1.17"
+  resolved "https://registry.yarnpkg.com/@nico-martin/spa-server/-/spa-server-0.1.17.tgz#d3c41bd3be7c6209fcf06e334b6d09b8d7065f59"
+  integrity sha512-gtrYP/q4eXMr8cw1cDRuekEbp1NPkxj10UTLpnV5k9BNBgmELFTWZ10t3UAp0mH2/vhhdT+hN4GGgH7lK6kiuw==
+  dependencies:
+    cheerio "^1.0.0-rc.3"
+    esm "^3.2.25"
+    http "^0.0.1-security"
+    node-static "^0.7.11"
+    path-to-regexp "^6.1.0"
+
 "@types/node-fetch@^2.5.7":
   version "2.5.7"
   resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.5.7.tgz#20a2afffa882ab04d44ca786449a276f9f6bbf3c"
@@ -233,6 +244,11 @@ error-ex@^1.2.0:
   dependencies:
     is-arrayish "^0.2.1"
 
+esm@^3.2.25:
+  version "3.2.25"
+  resolved "https://registry.yarnpkg.com/esm/-/esm-3.2.25.tgz#342c18c29d56157688ba5ce31f8431fbb795cc10"
+  integrity sha512-U1suiZ2oDVWv4zPO56S0NcR5QriEahGtdN2OR6FiOG4WJvcjBVFB0qI4+eKoWFH483PKGuLuu6V8Z4T5g63UVA==
+
 filewatcher@~3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/filewatcher/-/filewatcher-3.0.1.tgz#f4a1957355ddaf443ccd78a895f3d55e23c8a034"
@@ -451,16 +467,6 @@ node-fetch@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
   integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
-
-node-metas@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/node-metas/-/node-metas-0.0.6.tgz#2554faebe55abc908bf48a556e6f84a7a7d5abec"
-  integrity sha512-eeRbTqk4/dsUJ3rxsdeAfLPDNaj43Qx2upWEe9VKExkJAqeq9wcKFxhsFNmXRDW4xSS+IYCIOat3fZhkuR6KFg==
-  dependencies:
-    cheerio "^1.0.0-rc.3"
-    http "^0.0.1-security"
-    node-static "^0.7.11"
-    path-to-regexp "^6.1.0"
 
 node-notifier@^5.4.0:
   version "5.4.3"

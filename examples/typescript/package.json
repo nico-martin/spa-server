@@ -7,9 +7,10 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpileOnly ./run.ts",
-    "serve": "node-metas"
+    "serve": "spa-server"
   },
   "dependencies": {
+    "@nico-martin/spa-server": "^0.1.17",
     "@types/node": "^13.9.3",
     "@types/node-fetch": "^2.5.7",
     "node-fetch": "^2.6.0",
