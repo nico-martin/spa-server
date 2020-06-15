@@ -32,5 +32,11 @@ export default {
       },
     },
   ],
+  redirects: [
+    {
+      path: '/nutzer/:id/',
+      to: '/user/:id/',
+    },
+  ],
   port: 8050,
 };

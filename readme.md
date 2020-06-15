@@ -110,7 +110,7 @@ import fetch from 'node-fetch';
 export default {
   routes: [
     {
-      path: '/user/:id/',
+      path: '/myapi/',
       response: async request => {
         const resp = await (
           await fetch(`https://myapi.com/`)
@@ -124,5 +124,89 @@ export default {
     },
   ],
   port: 8888,
+};
+```
+## Config
+### `routes`
+An Array of routes. Each route consists of a path and a response.
+
+The `path` is defined as a string that will be parsed to a Regex where the matches will be passed to the response.
+
+The `response` is a function that returns the `metas`, `headers` and the `statusCode` as an object.
+```js
+export default {
+  routes: [
+    {
+      path: '/:slug/',
+      metas: request => {
+        return {
+          metas: {
+            title: 'Slug ' + request.params.slug,
+          },
+          headers: {
+            'my-header': 'Hello World'
+          },
+          statusCode: 200
+        }
+      },
+    }
+  ]
+};
+```
+`metas`can also be an async function where `await` can be used.
+
+### `redirects` 
+With `redirects` sources and targets where the server immediately returns a 302 status with the target as Location header.
+
+Both, source (`path`) and target (`to`) can contain variables:
+```js
+export default {
+  redirects: [
+    {
+      path: '/my/source/',
+      to: '/my/target/',
+    },
+    {
+      path: '/nutzer/:id/', // /nutzer/5/
+      to: '/user/:id/', // /user/5/
+    },
+  ],
+};
+```
+
+### `port`
+Default port is 8080 but can easily be changed to a different port.
+
+### `indexFile`
+In general, most Single Page Applications have an `index.html` file as an entry point. If for whatever reason your setup has a a different file, it cn be adjusted as well.
+
+### `serverDir`
+By default, "SPA Server" expects the whole application inside the `dist/` folder. But can be any othe folder.
+
+### `errorPagesDir`
+When the server experiences difficulties, it will throw an error page. But you can esily set a custom page yourself. Let's assume you have a page for a 500 error inside en `error/` folder:
+
+File: `error/500.html`:
+```js
+export default {
+  errorPagesDir: 'error/',
+};
+```
+
+### `onError`
+A callback that will be called whenever anything trows and e 500 will be returned.
+
+### `logLevel`
+"SPA Server" is riddled with different logs on specific levels: `'DEBUG' | 'WARNING' | 'ERROR' | 'SYSTEM'`.  
+default: `ERROR`
+
+### `serverOptions`
+If you want to serve your content over HTTPS (SSL) you can pass the path to the `key` and the `cert` within the `serverOptions`:
+```js
+export default {
+  serverOptions: {
+    key: 'path/to/ssl/cert.key',
+    cert: 'path/to/ssl/cert.crt',
+  },
 };
 ```
