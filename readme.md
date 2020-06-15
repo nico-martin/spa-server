@@ -83,18 +83,46 @@ spaServer({
       },
     },
   ],
-  redirects: [ // optional
+  redirects: [
     {
       path: '/nutzer/:id/',
       to: '/user/:id/',
     },
   ],
-  port: 3000, // optional => default 8080
-  indexFile: 'index.gtml', // optional
-  serveDir: 'dist/', // optional
-  errorPagesDir: 'path/to/custom/error/templates/', // optional
-  onError: e => console.log(e), // optional
-  logLevel: 'ERROR', // optional 'DEBUG' | 'WARNING' | 'ERROR' | 'SYSTEM'
+  port: 3000, // default 8080
+  indexFile: 'index.gtml',
+  serveDir: 'dist/',
+  errorPagesDir: 'path/to/custom/error/templates/',
+  onError: e => console.log(e),
+  logLevel: 'ERROR', // 'DEBUG' | 'WARNING' | 'ERROR' | 'SYSTEM'
   serverOptions: {}, // additional options for the node-http server
 });
+```
+
+### server.config.js
+
+"SPA Server" comes with a handy single executable. `npm spa-server` (or `yarn spa-server`) will start the server with default configurations. Additionally it looks for a `server.config.js` file that expects one default export with all the arguments from above.
+
+```js
+// server.config.js
+import fetch from 'node-fetch';
+
+export default {
+  routes: [
+    {
+      path: '/user/:id/',
+      response: async request => {
+        const resp = await (
+          await fetch(`https://myapi.com/`)
+        ).json();
+        return {
+          metas: {
+            title: resp.title,
+          },
+        }
+      },
+    },
+  ],
+  port: 8888,
+};
 ```
