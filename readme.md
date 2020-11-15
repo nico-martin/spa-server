@@ -201,7 +201,7 @@ A callback that will be called whenever anything trows and e 500 will be returne
 default: `ERROR`
 
 ### `serverOptions`
-If you want to serve your content over HTTPS (SSL) you can pass the path to the `key` and the `cert` within the `serverOptions`:
+- If you want to serve your content over HTTPS (SSL) you can pass the path to the `key` and the `cert` within the `serverOptions`:
 ```js
 export default {
   serverOptions: {
