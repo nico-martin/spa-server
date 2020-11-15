@@ -135,7 +135,7 @@ const spaServer = async ({
        */
       response.writeHead(parsed.statusCode, {
         ...parsed.headers,
-        ...error.headers,
+        ...(error ? error.headers : {}),
       });
       response.end(index);
     } catch (err) {

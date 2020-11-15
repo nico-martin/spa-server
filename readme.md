@@ -29,7 +29,7 @@ In essence, the library provides the ability to define your own routes and creat
 ```js
 {
   path: '/',
-  metas: request => {
+  response: request => {
     return {
       metas: {
         'name-of-the-meta': 'content of the meta',
@@ -51,7 +51,7 @@ spaServer({
   routes: [
     {
       path: '/user/:id/',
-      metas: request => ({    
+      response: request => ({    
         metas: {
           'user-id': 'id' in request.params ? request.params.id : '',
           hello: 'world',
@@ -61,7 +61,7 @@ spaServer({
     },
     {
       path: '/post/:id/',
-      metas: async request => {
+      response: async request => {
         const id = 'id' in request.params ? request.params.id : 0;
         let metas = {};
         let statusCode = 200;
@@ -138,7 +138,7 @@ export default {
   routes: [
     {
       path: '/:slug/',
-      metas: request => {
+      response: request => {
         return {
           metas: {
             title: 'Slug ' + request.params.slug,

@@ -15,20 +15,18 @@ export default (
     response: http.ServerResponse
   ) => {
     request
-      .addListener('end', () => {
-        file.serve(request, response, async error => {
-          if (error) {
-            handleError({
-              request,
-              response,
-              // @ts-ignore
-              error,
-            });
-          } else {
-            log(`Static file served: ${request.url}`, logLevels.DEBUG);
-          }
-        });
-      })
+      .addListener('end', () =>
+        file.serve(request, response, async error =>
+          error || request.url === '/'
+            ? handleError({
+                request,
+                response,
+                // @ts-ignore
+                error,
+              })
+            : log(`Static file served: ${request.url}`, logLevels.DEBUG)
+        )
+      )
       .resume();
   };
 
