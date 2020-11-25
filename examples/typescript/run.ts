@@ -4,10 +4,27 @@ import fetch from 'node-fetch';
 spaServer({
   routes: [
     {
+      path: '/',
+      response: request => ({
+        metas: {
+          title: '12345',
+        },
+        statusCode: 203,
+      }),
+    },
+    {
       path: '/user/:id/',
       response: request => ({
         metas: {
           title: `User ${'id' in request.params ? request.params.id : ''}`,
+          description: 'Test',
+          canonical: {
+            tag: 'link',
+            attributes: {
+              rel: 'canonical',
+              href: 'https://die-orginale.url',
+            },
+          },
         },
         headers: {
           'my-custom-header': 'id' in request.params ? request.params.id : '',

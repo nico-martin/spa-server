@@ -32,7 +32,13 @@ export namespace SPAServer {
     statusCode: number;
   }
 
-  export type Metas = Record<string, string>;
+  export interface MetaObject {
+    tag: string;
+    attributes: Record<string, string>;
+    content?: string;
+  }
+
+  export type Metas = Record<string, string | MetaObject>;
   export type Headers = Record<string, string>;
 
   export interface Redirect {

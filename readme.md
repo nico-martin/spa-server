@@ -55,6 +55,13 @@ spaServer({
         metas: {
           'user-id': 'id' in request.params ? request.params.id : '',
           hello: 'world',
+          custom: {
+            tag: 'link',
+            attributes: {
+              rel: 'canonical',
+              href: 'some-url'
+            }       
+          }         
         },
         statusCode: 200
       }),

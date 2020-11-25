@@ -17,7 +17,7 @@ export default (
     request
       .addListener('end', () =>
         file.serve(request, response, async error =>
-          error || request.url === '/'
+          error
             ? handleError({
                 request,
                 response,

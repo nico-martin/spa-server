@@ -19,6 +19,7 @@ export const filterRoute = <T extends { path: string }>(
     } else {
       const urlMatch = match(route.path, { decode: decodeURIComponent });
       const result = urlMatch(url);
+
       if (result) {
         return {
           route: result.path,

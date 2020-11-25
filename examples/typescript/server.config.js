@@ -3,6 +3,15 @@ import fetch from 'node-fetch';
 export default {
   routes: [
     {
+      path: '/',
+      response: request => ({
+        metas: {
+          title: '12345',
+        },
+        statusCode: 203,
+      }),
+    },
+    {
       path: '/user/:id/',
       response: request => ({
         metas: {
