@@ -25,6 +25,7 @@ spaServer({
               href: 'https://die-orginale.url',
             },
           },
+          test: ['content', 'property'],
         },
         headers: {
           'my-custom-header': 'id' in request.params ? request.params.id : '',

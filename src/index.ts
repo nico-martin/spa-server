@@ -38,7 +38,9 @@ export namespace SPAServer {
     content?: string;
   }
 
-  export type Metas = Record<string, string | MetaObject>;
+  export type MetaArray = [string, 'name' | 'property'];
+
+  export type Metas = Record<string, string | MetaObject | MetaArray>;
   export type Headers = Record<string, string>;
 
   export interface Redirect {

@@ -25,6 +25,10 @@ export const applyMetas = (
       normalized.tag = 'meta';
       normalized.attributes['name'] = key;
       normalized.attributes['content'] = value;
+    } else if (Array.isArray(value)) {
+      normalized.tag = 'meta';
+      normalized.attributes[value[1]] = key;
+      normalized.attributes['content'] = value[0];
     } else {
       normalized = value;
     }
